@@ -30,17 +30,6 @@ const store = new Vuex.Store({
    
    },
   
-   getters: {
-    completedTask(state) {
-      return state.tasks.filter(todo => todo.isCompleted)
-    },
-    pendingTask(state){
-       return state.tasks.filter(task =>!task.isCompleted)
-    },
-    allTasks(state) {
-      return state.tasks
-    }
-   },
   mutations: {
     
     saveTask(state,inputValue){
