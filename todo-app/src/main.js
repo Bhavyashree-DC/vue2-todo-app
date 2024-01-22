@@ -30,6 +30,17 @@ const store = new Vuex.Store({
    
    },
   
+   getters: {
+    completedTask(state) {
+      return state.tasks.filter(todo => todo.isCompleted)
+    },
+    pendingTask(state){
+       return state.tasks.filter(task =>!task.isCompleted)
+    },
+    allTasks(state) {
+      return state.tasks
+    }
+   },
   mutations: {
     
     saveTask(state,inputValue){
@@ -40,6 +51,35 @@ const store = new Vuex.Store({
           isEditing:false,
       })
     },
+    toggleStatus(state,id) {
+      let task = state.tasks.find(item => item.id === id);
+      if(task){
+          task.isCompleted = !task.isCompleted;
+      }
+    },
+    deleteTask(state,id){
+        const index = state.tasks.findIndex(task => task.id === id);
+        if (index !== -1) {
+          confirm('Do you want to delete this task?');
+          state.tasks.splice(index, 1);
+        } else {
+            console.log("Task not found for ", index);
+        }
+  },
+  startEditing(state, id) {
+      const task = state.tasks.find(task => task.id === id);
+      if (task) {
+        task.isEditing = true;
+        task.editedTaskName = task.todoName;
+      }
+  },
+  finishEditing(state, id) {
+      const task = state.tasks.find(task => task.id === id);
+      if (task) {
+        task.isEditing = false;
+        task.todoName = task.editedTaskName;
+      }
+  }
   }
 })
 import './assets/main.css'
