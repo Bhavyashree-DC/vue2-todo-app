@@ -19,14 +19,6 @@
              Pending: {{ pendingTask.length }}
            </div>
          </div>
-          <!-- <div class="status">
-            <li><h3>Completed</h3>
-                <span class="bar" :style="{ width: completedLevel, backgroundColor: completedBarColor }" ></span>
-           </li>
-            <li><h3>Pending</h3>
-                <span class="bar" ><span class="pending" :style="{ width: pendingLevel, backgroundColor: pendingBarColor }"></span></span>
-            </li>
-          </div> -->
          <TaskList :taskList="tasks"></TaskList>
       </div>
   </div>
@@ -39,7 +31,10 @@ import { mapGetters } from 'vuex'
 
 export default{
   name:'App',
-  components:{ InputForm,TaskList},
+  components:{ 
+    InputForm,
+    TaskList
+  },
 
   data(){
      return{
@@ -58,33 +53,6 @@ export default{
         let dateFormat = new Intl.DateTimeFormat("en-GB", this.dateFormatOptions);
         return dateFormat.format(today);
      },
-     completedBarColor() {
-     const totalTasks = this.allTasks.length;
-     const completedTasks = this.completedTasks.length;
-     const completionPercentage = (completedTasks / totalTasks) * 100;
-
-    
-     return completionPercentage > 50 ? '#28a745' : '#5bc0de'; 
-   },
-
-   pendingBarColor() {
-     const totalTasks = this.allTasks.length;
-     const pendingTasks = this.pendingTasks.length;
-     const completionPercentage = (pendingTasks / totalTasks) * 100;
-
-     return completionPercentage > 50 ? '#ffc107' : '#5bc0de'; 
-   },
-   completedLevel() {
-     const totalTasks = this.allTasks.length;
-     const completedTasks = this.completedTasks.length;
-     return (completedTasks / totalTasks) * 100 || 0; // Prevent division by zero
-   },
-
-   pendingLevel() {
-     const totalTasks = this.allTasks.length;
-     const pendingTasks = this.pendingTasks.length;
-     return (pendingTasks / totalTasks) * 100 || 0; // Prevent division by zero
-   },
      ...mapGetters({
         tasks: 'allTasks',
         completedTask :'completedTask',
