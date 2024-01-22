@@ -1,51 +1,83 @@
- <template>
+<template>
     <div class="list-items">
-        <ul class="task-list">
-            <li v-for="(list,index) in tasks" 
-            :key="index" 
-            class="items">
-                <div class="item-list">
-                    <input type="checkBox" 
-                    class="select-item"
-                    :checked="list.isCompleted"
-                    @change="updateStatus(list.id)">
+            <ul class="task-list">
+                <li v-for="(list,index) in filteredTasks" 
+                :key="index" 
+                class="items">
+                    <div class="item-list">
+                        <input type="checkBox" 
+                        class="select-item"
+                        :checked="list.isCompleted"
+                        @change="updateStatus(list.id)">
 
-                    <input v-if="list.isEditing"
-                    class="edit-item"
-                    v-model="list.editedTaskName"
-                    @keyup.enter="finishEditing(list.id)"
-                    />
+                        <input v-if="list.isEditing"
+                        class="edit-item"
+                        v-model="list.editedTaskName"
+                        @keyup.enter="finishEditing(list.id)"
+                        />
 
-                <h4  v-if="!list.isEditing" :class="{ 'completed': list.isCompleted === true }">
-                    {{ list.todoName }}
-                </h4>
-                </div>
-                <div class="more-options">
-                    <i
-                    :class="{ 'disabled-icon': list.isCompleted === true,'ri-edit-circle-fill': list.isCompleted !== true , 'ri-checkbox-circle-line' :list.isCompleted === true }"
-                    @click="startEditing(list.id)"
-                    ></i>
-                    <i class="ri-delete-bin-line" @click="deleteTask(list.id)"></i>
-                </div>
-            </li>
-        </ul> 
-</div>
+                    <h4  v-if="!list.isEditing" :class="{ 'completed': list.isCompleted === true }">
+                        {{ list.todoName }}
+                    </h4>
+                    </div>
+                    <div class="more-options">
+                        <i
+                        :class="{ 'disabled-icon': list.isCompleted === true,'ri-edit-circle-fill': list.isCompleted !== true , 'ri-checkbox-circle-line' :list.isCompleted === true }"
+                        @click="startEditing(list.id)"
+                        ></i>
+                        <i class="ri-delete-bin-line" @click="deleteTask(list.id)"></i>
+                    </div>
+                </li>
+            </ul> 
+       <!-- </div> -->
+    </div>
 </template>
 
 <script>
-export default {
+
+export default ({
     name:'TaskList',
     data() {
         return{
           listHeader:"Today's List",
           editingId: -1,
           editedTaskName: '',
+          showCompleted: true,
         }
-    }
-}
+    },
+    methods:{
+        updateStatus(id){
+            this.$store.commit('toggleStatus',id);
+        },
+        deleteTask(id){
+            this.$store.commit('deleteTask',id);
+         },
+         startEditing(id) {
+            this.$store.commit('startEditing', id);
+        },
+        finishEditing(id) {
+            this.$store.commit('finishEditing', id);
+        }
+    },
+    computed:{
+        allTasks(){
+            return this.$store.getters.allTasks;
+        },
+       completedTasks(){
+          return this.$store.getters.completedTask;
+       },
+       pendingTasks(){
+          return this.$store.getters.pendingTask;
+       },
+       filteredTasks(){
+        const tasks = this.showCompleted ? [...this.completedTasks, ...this.pendingTasks] : this.pendingTasks;
+          return tasks.sort((a, b) => (a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1));
+       },
+    },
+   
+})
 </script>
-
-<style>
+<style scoped>
 .list-items{
     width: 100%;
     height: auto;
@@ -130,3 +162,4 @@ export default {
     color:lightgrey;
 }
 </style>
+
