@@ -10,30 +10,26 @@
           <div class="date">
               {{ currentDate }}
           </div>
-          <InputForm></InputForm>
-          <div class="task-summary">
-           <div class="completed-summary">
-             Completed: {{ completedTask.length }}
-           </div>
-           <div class="pending-summary">
-             Pending: {{ pendingTask.length }}
-           </div>
-         </div>
-         <TaskList :taskList="tasks"></TaskList>
+          <InputField></InputField>
+          <TaskSummary></TaskSummary>
+          <TaskList :taskList="tasks"></TaskList>
       </div>
   </div>
 </template>
 
 <script>
-import  InputForm  from './components/InputForm.vue'
+import  InputField  from './components/InputField.vue'
 import TaskList from './components/TaskList.vue';
+import TaskSummary from './components/TaskSummary.vue'
+
 import { mapGetters } from 'vuex'
 
 export default{
   name:'App',
   components:{ 
-    InputForm,
-    TaskList
+    InputField,
+    TaskList,
+    TaskSummary,
   },
 
   data(){
@@ -98,22 +94,6 @@ export default{
   margin:10px 0px;
   padding: 10px;
   font-size: 1.4rem;
-}
-
-.task-summary {
-  display: flex;
-  justify-content: space-evenly;
-  gap:20px;
-  align-items: center;
-  margin: 10px 20px 0px 20px;
-}
-
-.completed-summary,
-.pending-summary {
-  border-bottom: 2px solid #007bff; 
-  border-radius: 20px;
-  background-color: rgb(113,127,166);/* Change color as needed */
-  padding: 18px;
 }
 
 .status{

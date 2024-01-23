@@ -8,7 +8,7 @@
 
 <script>
    export default{
-     name:'InputForm',
+     name:'InputField',
      data(){
         return{
          inputValue : '',
