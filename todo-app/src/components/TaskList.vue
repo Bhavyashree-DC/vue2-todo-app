@@ -16,7 +16,7 @@
                         @keyup.enter="finishEditing(list.id)"
                         />
 
-                    <h4  v-if="!list.isEditing" :class="{ 'completed': list.isCompleted === true }">
+                    <h4 v-if="!list.isEditing" :class="{ 'completed': list.isCompleted === true }">
                         {{ list.todoName }}
                     </h4>
                     </div>
@@ -70,7 +70,7 @@ export default ({
           return this.$store.getters.pendingTask;
        },
        filteredTasks(){
-        const tasks = this.showCompleted ? [...this.completedTasks, ...this.pendingTasks] : this.pendingTasks;
+        const tasks = this.showCompleted ? [...this.allTasks] : this.pendingTasks;
           return tasks.sort((a, b) => (a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1));
        },
     },
@@ -78,11 +78,14 @@ export default ({
 })
 </script>
 <style scoped>
+*{
+   box-sizing: border-box;
+}
+
 .list-items{
     width: 100%;
     height: auto;
-    overflow-y: auto;
-    margin: 10px 0px;
+    margin: 30px 0px;
 }
 
 .list-items h3{
@@ -96,16 +99,16 @@ export default ({
     align-items: center;
     margin: 0px;
     height: 100%;
+    overflow-y: auto;
 }
 .task-list li{
-    font-size: 24px;
+    font-size: 20px;
     height: 80px; 
 }
 
 .items{
-    min-width: 90%;
-    height: 80px;
-    padding:22px;
+    width: 100%; 
+    padding:20px;
     margin: 15px 0px;
     background-color: rgb(113,127,166);
     border-radius: 20px;

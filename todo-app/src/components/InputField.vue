@@ -21,6 +21,13 @@
                 return;
             }
 
+            const existingTask = this.$store.getters.allTasks.find(
+                                 (task) => task.todoName.toLowerCase() === this.inputValue.toLowerCase());
+                                 
+            if(existingTask){
+                alert("Task with the same name already exists!");
+                return;
+            }
             this.$store.commit('saveTask', this.inputValue);
             this.inputValue = ''; 
         },
@@ -45,27 +52,27 @@
     background-color:#919AB6;
     border-radius: 20px;
     font-size:18px;
-    padding:10px;
-    margin:10px 0px;
+    padding: 8px;
+    margin:14px 0px 20px 0px;
     color:#fff;
 }
 .input-field input::placeholder{
-    padding:20px 40px;
-    font-size: 20px;
+    padding:20px 30px;
+    font-size: 18px;
     color:#fff;
 }
 .input-field button{
    width:68px;
    height: 60px;
    padding:10px;
-   margin: 10px 0px;
+   margin: 14px 0px 20px 0px;
    border-radius: 10px;
    cursor: pointer;
    background-color:coral;
    color:#fff;
 }
 .input-field button:hover{
-    background-color:rgb(240, 153, 122)  ;
+    background-color:#f0997a  ;
 }
 .task-list ul.list-items{
     min-height: 80px;

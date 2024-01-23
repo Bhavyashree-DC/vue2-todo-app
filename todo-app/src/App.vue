@@ -51,8 +51,8 @@ export default{
      },
      ...mapGetters({
         tasks: 'allTasks',
-        completedTask :'completedTask',
-        pendingTask :'pendingTask'
+        doneTasks :'completedTask',
+        pendingTasks :'pendingTask'
      })
   }
 }
@@ -91,7 +91,7 @@ export default{
   height:5px;
 }
 .todo-app .date{
-  margin:10px 0px;
+  margin:10px 0px 0px 0px;
   padding: 10px;
   font-size: 1.4rem;
 }

@@ -21,7 +21,7 @@ export default {
     justify-content: space-evenly;
     gap:20px;
     align-items: center;
-    margin: 10px 20px 0px 20px;
+    margin: 18px 20px -5px 20px;
   }
   
   .completed-summary,

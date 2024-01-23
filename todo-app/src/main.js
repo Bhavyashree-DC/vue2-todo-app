@@ -65,20 +65,20 @@ const store = new Vuex.Store({
         } else {
             console.log("Task not found for ", index);
         }
-  },
-  startEditing(state, id) {
-      const task = state.tasks.find(task => task.id === id);
-      if (task) {
-        task.isEditing = true;
-        task.editedTaskName = task.todoName;
-      }
-  },
-  finishEditing(state, id) {
-      const task = state.tasks.find(task => task.id === id);
-      if (task) {
-        task.isEditing = false;
-        task.todoName = task.editedTaskName;
-      }
+    },
+    startEditing(state, id) {
+        const task = state.tasks.find(task => task.id === id);
+        if (task) {
+          task.isEditing = true;
+          task.editedTaskName = task.todoName;
+        }
+    },
+    finishEditing(state, id) {
+        const task = state.tasks.find(task => task.id === id);
+        if (task) {
+          task.isEditing = false;
+          task.todoName = task.editedTaskName;
+        }
   }
   }
 })
