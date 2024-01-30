@@ -1,17 +1,24 @@
  <template>
     <div class="task-summary">
         <div class="completed-summary">
-          Completed: {{ this.$store.getters.completedTask.length }}
+          Completed: {{ doneTask.length }}
         </div>
         <div class="pending-summary">
-          Pending: {{ this.$store.getters.pendingTask.length }}
+          Pending: {{ pendingTasks.length }}
         </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
    name:'TaskSummary',
+   computed:{
+    ...mapGetters({
+        doneTasks: 'completedTask',
+        pendingTasks:'pendingTask'
+    })
+   }
 }
 </script>
 
