@@ -7,9 +7,7 @@
               </div>
           </header>
           <hr>
-          <div class="date">
-              {{ currentDate }}
-          </div>
+          <CurrentDate></CurrentDate>
           <InputField></InputField>
           <TaskSummary></TaskSummary>
           <TaskList :taskList="tasks"></TaskList>
@@ -18,9 +16,11 @@
 </template>
 
 <script>
+
 import  InputField  from './components/InputField.vue'
 import TaskList from './components/TaskList.vue';
 import TaskSummary from './components/TaskSummary.vue'
+import CurrentDate from './components/CurrentDate.vue'
 
 import { mapGetters } from 'vuex'
 
@@ -30,29 +30,16 @@ export default{
     InputField,
     TaskList,
     TaskSummary,
+    CurrentDate,
   },
-
   data(){
-     return{
-        header:'ToDo App', 
-        dateFormatOptions: {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-     },
-     }
+    return{
+      header:'Todo App'
+    }
   },
-  
   computed:{
-     currentDate(){
-        let today = new Date();
-        let dateFormat = new Intl.DateTimeFormat("en-GB", this.dateFormatOptions);
-        return dateFormat.format(today);
-     },
      ...mapGetters({
         tasks: 'allTasks',
-        doneTasks :'completedTask',
-        pendingTasks :'pendingTask'
      })
   }
 }
@@ -89,11 +76,6 @@ export default{
 }
 .todo-app hr{
   height:5px;
-}
-.todo-app .date{
-  margin:10px 0px 0px 0px;
-  padding: 10px;
-  font-size: 1.4rem;
 }
 
 .status{

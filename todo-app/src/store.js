@@ -26,6 +26,8 @@ export const store = new Vuex.Store({
               isEditing:false,
           }
         ],
+        currentDate : '',
+        currentTime : '',
     },
     getters: {
         completedTask(state) {
@@ -39,7 +41,6 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
-    
         saveTask(state,inputValue){
           state.tasks.push({
               id:state.tasks.length + 1,
@@ -76,7 +77,32 @@ export const store = new Vuex.Store({
               task.isEditing = false;
               task.todoName = task.editedTaskName;
             }
-      }
-      }
-    
+        },
+        updateDateTime(state, { currentDate,currentTime }){
+           state.currentDate = currentDate;
+           state.currentTime = currentTime;
+        }
+    },
+    actions:{
+       startDateTimeInterval(context){
+           setInterval(() => {
+              const today = new Date();
+              const dateFormat = new Intl.DateTimeFormat('en-GB', {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric',
+              });
+              const timeFormat = new Intl.DateTimeFormat('en-GB', {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true,
+              });
+              const currentDate = dateFormat.format(today);
+              const currentTime = timeFormat.format(today);
+
+              context.commit('updateDateTime',{ currentDate , currentTime});
+           },1000)
+       },
+    }
 })
