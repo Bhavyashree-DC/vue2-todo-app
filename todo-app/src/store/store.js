@@ -92,9 +92,9 @@ export const store = new Vuex.Store({
            setInterval(() => {
               const today = new Date();
               const dateFormat = new Intl.DateTimeFormat('en-GB', {
-                  weekday: 'long',
                   month: 'long',
                   day: 'numeric',
+                  weekday: 'long',
               });
               const timeFormat = new Intl.DateTimeFormat('en-GB', {
                   hour: 'numeric',

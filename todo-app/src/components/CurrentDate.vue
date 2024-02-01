@@ -20,12 +20,19 @@ export default{
 <style scoped>
  .date-time-header{
     display: flex;
-     align-items: center; 
+     /* align-items: center;  */
     flex-direction: column;
  }
-.date,.time{
-  margin:10px 0px 0px 0px;
-  padding: 10px 10px 5px 10px;
+.date{
+  margin:5px 0px 0px 0px;
+  padding: 7px 10px 2px 10px;
+  font-size: 1.4rem;
+
+}
+
+.time{
+  margin:5px 0px 0px 0px;
+  padding: 7px 10px 20px 10px;
   font-size: 1.4rem;
 
 }

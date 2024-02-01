@@ -1,5 +1,6 @@
 <template>
     <div class="list-items">
+        <h4>{{ listHeader }}</h4>
             <ul class="task-list">
                 <li v-for="(list,index) in filteredTasks" 
                 :key="index" 
@@ -69,9 +70,8 @@ export default ({
           return this.$store.getters.pendingTask;
        },
        filteredTasks(){
-        let tasks = [];
-
-        if (this.$store.state.viewMode === 'all') {
+            let tasks = [];
+            if (this.$store.state.viewMode === 'all') {
             tasks = this.allTasks.slice().sort((a, b) => {
                 if (!a.isCompleted && b.isCompleted) return -1;
                 if (a.isCompleted && !b.isCompleted) return 1;
@@ -85,8 +85,7 @@ export default ({
 
             return tasks;
        },
-    },
-   
+   }
 })
 </script>
 <style scoped>
@@ -97,12 +96,12 @@ export default ({
 .list-items{
     width: 100%;
     height: auto;
-    margin: 10px 0px 7px 0px;
+    margin: 20px 0px 7px 0px;
 }
 
-.list-items h3{
-    margin: 30px  0px;
+.list-items h4{
     font-size: 1.3rem;
+    margin: 12px 0px;
 }
 .task-list {
     list-style: none;

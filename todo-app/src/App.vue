@@ -1,12 +1,9 @@
 <template>
   <div class="container">
       <div class="todo-app">
-          <header>
-              <div class="header">
-                  <!-- <h2>{{ header }} </h2>   -->
-              </div>
-          </header>
-          <hr>
+        <div class="header">
+            <h1>{{ header }}</h1>
+        </div>
           <CurrentDate></CurrentDate>
           <InputField></InputField>
           <Tabs></Tabs>
@@ -52,7 +49,7 @@ export default{
   min-height: 900px;
   background-color:#324D9E;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(72, 70, 70, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   color:#fff ;
 
   display: flex;
@@ -70,46 +67,9 @@ export default{
 }
 .todo-app .header{
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 10px;
   padding:10px;
-}
-.todo-app hr{
-  height:5px;
-}
-
-.status{
-  display:flex;
-  gap:19px;
-  width:100%;
-  margin:5px 0px;
-  color: #fff;
-  padding:20px 0px;
-}
-
-.status li{
-  list-style: none;
-  padding: 10px 0px;
-}
-.status h3{
-   margin:14px 0px;
-}
-.bar{
-  background: #fff;
-  color:#324D9E;
-  display: block;
-  height:10px;
-  width:200px;
-  border:1px solid rgba(0,0,0,0.3);
-  border-radius: 10px;
-  overflow:hidden;
-}
-.task-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0px;
 }
 
 

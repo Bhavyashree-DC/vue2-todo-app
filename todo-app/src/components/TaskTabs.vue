@@ -73,8 +73,8 @@ export default {
     border-bottom: 2px solid #007bff; 
     border-radius: 50%;
     background-color: rgb(113,127,166);
-    padding: 12px 14px;
-    margin:20px;
+    padding: 10px 12px;
+    margin:10px 0px 16px 0px;
     cursor: pointer;
   }
   .allTasks-summary:hover,
