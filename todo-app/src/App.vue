@@ -3,13 +3,13 @@
       <div class="todo-app">
           <header>
               <div class="header">
-                  <h2>{{ header }} </h2>  
+                  <!-- <h2>{{ header }} </h2>   -->
               </div>
           </header>
           <hr>
           <CurrentDate></CurrentDate>
           <InputField></InputField>
-          <TaskSummary></TaskSummary>
+          <Tabs></Tabs>
           <TaskList :taskList="tasks"></TaskList>
       </div>
   </div>
@@ -19,7 +19,7 @@
 
 import  InputField  from './components/InputField.vue'
 import TaskList from './components/TaskList.vue';
-import TaskSummary from './components/TaskSummary.vue'
+import Tabs from './components/TaskTabs.vue'
 import CurrentDate from './components/CurrentDate.vue'
 
 import { mapGetters } from 'vuex'
@@ -29,7 +29,7 @@ export default{
   components:{ 
     InputField,
     TaskList,
-    TaskSummary,
+    Tabs,
     CurrentDate,
   },
   data(){

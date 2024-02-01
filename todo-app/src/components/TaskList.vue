@@ -25,11 +25,10 @@
                         :class="{ 'disabled-icon': list.isCompleted === true,'ri-edit-circle-fill': list.isCompleted !== true , 'ri-checkbox-circle-line' :list.isCompleted === true }"
                         @click="startEditing(list.id)"
                         ></i>
-                        <i class="ri-delete-bin-line" @click="deleteTask(list.id)"></i>
+                        <i class="ri-delete-bin-line" @click="$store.commit('deleteTask',list.id)"></i>
                     </div>
                 </li>
             </ul> 
-       <!-- </div> -->
     </div>
 </template>
 
@@ -49,9 +48,9 @@ export default ({
         updateStatus(id){
             this.$store.commit('toggleStatus',id);
         },
-        deleteTask(id){
-            this.$store.commit('deleteTask',id);
-         },
+        // deleteTask(id){
+        //     this.$store.commit('deleteTask',id);
+        //  },
          startEditing(id) {
             this.$store.commit('startEditing', id);
         },
@@ -70,8 +69,21 @@ export default ({
           return this.$store.getters.pendingTask;
        },
        filteredTasks(){
-        const tasks = this.showCompleted ? [...this.allTasks] : this.pendingTasks;
-          return tasks.sort((a, b) => (a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1));
+        let tasks = [];
+
+        if (this.$store.state.viewMode === 'all') {
+            tasks = this.allTasks.slice().sort((a, b) => {
+                if (!a.isCompleted && b.isCompleted) return -1;
+                if (a.isCompleted && !b.isCompleted) return 1;
+                return a.todoName.localeCompare(b.todoName);
+            });
+            } else if (this.$store.state.viewMode === 'completed') {
+                tasks = this.completedTasks;
+            } else if (this.$store.state.viewMode === 'pending') {
+                tasks = this.pendingTasks;
+            }
+
+            return tasks;
        },
     },
    
@@ -85,11 +97,11 @@ export default ({
 .list-items{
     width: 100%;
     height: auto;
-    margin: 30px 0px;
+    margin: 10px 0px 7px 0px;
 }
 
 .list-items h3{
-    margin: 20px  0px;
+    margin: 30px  0px;
     font-size: 1.3rem;
 }
 .task-list {
@@ -103,13 +115,13 @@ export default ({
 }
 .task-list li{
     font-size: 20px;
-    height: 80px; 
+    height: 70px; 
 }
 
 .items{
     width: 100%; 
-    padding:20px;
-    margin: 15px 0px;
+    padding:16px;
+    margin: 16px 0px;
     background-color: rgb(113,127,166);
     border-radius: 20px;
 
@@ -121,7 +133,7 @@ export default ({
 
 .items .item-list {
     display: flex;
-    gap:20px;
+    gap:10px;
     align-items: center;
 }
 .items .select-item{

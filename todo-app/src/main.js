@@ -1,7 +1,7 @@
 import App from './App.vue'
 import Vue from 'vue'
 
-import { store } from './store'
+import { store } from './store/store'
 
 import './assets/main.css'
 

@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state:{
-        count: 0,
+        viewMode: 'all',
         tasks: [
           {
               id:1,
@@ -38,7 +38,7 @@ export const store = new Vuex.Store({
         },
         allTasks(state) {
           return state.tasks
-        }
+        },
     },
     mutations: {
         saveTask(state,inputValue){
@@ -48,6 +48,7 @@ export const store = new Vuex.Store({
               isCompleted:false,
               isEditing:false,
           })
+         
         },
         toggleStatus(state,id) {
           let task = state.tasks.find(item => item.id === id);
@@ -81,6 +82,9 @@ export const store = new Vuex.Store({
         updateDateTime(state, { currentDate,currentTime }){
            state.currentDate = currentDate;
            state.currentTime = currentTime;
+        },
+        setViewMode(state,mode){
+            state.viewMode = mode;
         }
     },
     actions:{
@@ -88,15 +92,15 @@ export const store = new Vuex.Store({
            setInterval(() => {
               const today = new Date();
               const dateFormat = new Intl.DateTimeFormat('en-GB', {
-                weekday: 'long',
-                month: 'long',
-                day: 'numeric',
+                  weekday: 'long',
+                  month: 'long',
+                  day: 'numeric',
               });
               const timeFormat = new Intl.DateTimeFormat('en-GB', {
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: true,
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  hour12: true,
               });
               const currentDate = dateFormat.format(today);
               const currentTime = timeFormat.format(today);
